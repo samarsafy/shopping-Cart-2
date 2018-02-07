@@ -39,7 +39,7 @@ class shoppingCart {
       document.querySelector(".card-body").appendChild(discount);
 
       var showNewPrice = document.createElement('p');
-      var newPrice = database[i].price - (database[i].price / 100 * database[i].discount);
+      var newPrice = database[i].price - (database[i].price * database[i].discount/100);
       showNewPrice.innerHTML = newPrice + "€";
       showNewPrice.classList.add("text-danger");
       element.querySelector(".card-body").appendChild(showNewPrice);
