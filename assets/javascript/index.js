@@ -27,6 +27,25 @@ class shoppingCart {
     var card = this.elements.template
     for (var i in database ) {
       var element = card.cloneNode(true);
+
+      var price = document.createElement("span");
+      price.innerHTML = database[i].price;
+      document.querySelector(".card-body").appendChild(price);
+      if(database[i].discount) {
+      price.style.textDecoration = "line-through"
+
+      var discount = document.createElement("span");
+      discount.innerHTML = database[i].discount;
+      document.querySelector(".card-body").appendChild(discount);
+
+      var showNewPrice = document.createElement('p');
+      var newPrice = database[i].price - (database[i].price / 100 * database[i].discount);
+      showNewPrice.innerHTML = newPrice + "€";
+      showNewPrice.classList.add("text-danger");
+      element.querySelector(".card-body").appendChild(showNewPrice);
+
+    }
+      
       //TODO here we have clone our template lets remove the id first and rmove display none class
 
       //TODO fill the element with the image from the database and add the name of the product to the title
@@ -42,8 +61,16 @@ class shoppingCart {
       element.querySelector(".card-img-top").src = database[i].image,
       element.querySelector(".card-title").prepend(i);
       var s = document.createElement("small");
-      s.classList.add("text-muted"),
-      s.innerHTML = `shipping: ${database[i].shipping}&euro; <br> delivery: ${database[i].delivery}d`,
+      s.classList.add("text-muted");
+      var currencySymbol = "$";
+      
+      if(window.location.search.substring(1)==="lang=de") {
+      currencySymbol = "€";
+      s.innerHTML = `shipping: ${database[i].shipping + currencySymbol} <br> delivery: ${database[i].delivery}d`;
+       } else {
+      s.innerHTML = `shipping: ${((database[i].shipping * 1.23).toFixed(2))+ currencySymbol} <br> delivery: ${database[i].delivery}d`;
+       }
+      
       element.querySelector(".card-footer").appendChild(s);
       var a = element.querySelector(".btn-primary");
       a.dataset.name = i, 
@@ -155,9 +182,17 @@ class shoppingCart {
       //fill it with a bootstrap badge span which shows the count, the name, the price, the total and the remove button
       // here yo go
       var listItem = document.createElement("li");
-      listItem.classList += "list-group-item d-flex justify-content-between align-items-center",
-      listItem.innerHTML = `<span class="badge badge-info badge-pill mr-2">${item.count} </span>  ${item.name} - ${item.price}&euro; <span class="ml-auto mr-3 font-weight-bold">${(item.price * item.count).toFixed(2)}&euro;</span>`;
-      var btn = document.createElement("button");
+      listItem.classList += "list-group-item d-flex justify-content-between align-items-center";
+      
+      var currencySymbol = "$";
+      if(window.location.search.substring(1)==="lang=de") {
+            currencySymbol = "€";
+            listItem.innerHTML = `<span class="badge badge-info badge-pill mr-2">${item.count} </span>  ${item.name} - ${item.price + currencySymbol}<span class="ml-auto mr-3 font-weight-bold">${(item.price * item.count).toFixed(2) + currencySymbol}</span>`;
+
+    }
+
+      else {listItem.innerHTML = `<span class="badge badge-info badge-pill mr-2">${item.count} </span>  ${item.name} - ${(item.price*1.23).toFixed(2) + currencySymbol}<span class="ml-auto mr-3 font-weight-bold">${((item.price * 1.23) * item.count).toFixed(2) + currencySymbol}</span>`;
+      }var btn = document.createElement("button");
       btn.classList.add("btn", "btn-sm", "btn-danger"),
       btn.dataset.name = item.name,
       btn.innerHTML = "<i class='fa fa-close pointer-events-none'></i>",

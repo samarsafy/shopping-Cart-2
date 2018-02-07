@@ -3,20 +3,25 @@
   <head>
     <title>Shopping Cart</title>
 
-    <meta charset="utf8">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="assets/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/stylesheets/style.css">
+    
     <link rel="stylesheet" href="assets/stylesheets/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
   </head>
 
   <body class="h-100">
     <main role="main" class="d-flex flex-column h-100">
     <header class="header clearfix">
       <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
-        <a class="navbar-brand" href="#">Kauf dich glücklich!</a>
+        <a class="navbar-brand" href="#" id="samar">Kauf dich glücklich!</a>
         <div class="ml-auto total-target mr-2 faded faders"> </div>
         <div class="" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
+          	<li class="nav-item mr-3"><a href="index.html?lang=en">EN</a></li>
+          	<li class="nav-item"><a href="index.html?lang=de">DE</a></li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -37,7 +42,7 @@
     <div class="container my-5">
       <div class="row">
         <div class="col-md-12">
-          <h2>Our Products</h2>
+          <h2 id="font">Our Products</h2>
           <div id="products" class="mb-5 row"></div>
         </div>
         <div id="cart" class="col-md-12 faders faded">
@@ -74,7 +79,7 @@
         <img class="card-img-top" src="" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title mb-0">
-          </h5>
+          </h5><span></span>
           <p class="card-text"></p>
         </div>
         <div class="card-footer">
